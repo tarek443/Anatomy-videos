@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anatomy</title>
+    <style>
+        /* Full-screen layout and reset */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Full-screen video styling for background */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; /* Ensures video stays behind content */
+            display: none; /* Start hidden */
+        }
+
+        /* Content overlay styling */
+        .content {
+            position: relative;
+            z-index: 1;
+            color: rgb(255, 255, 255);
+            text-align: center;
+            padding-top: 5%;
+        }
+
+        button {
+            margin: 5px;
+            padding: 12px 30px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        /* Hide the video player initially */
+        #videoPlayer {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Background videos in sequence -->
+<video class="video-background" id="backgroundVideo1" autoplay muted>
+    <source src="file:///D:/Medically accurate circulatory system 3d animation(1080P_HD).mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+<video class="video-background" id="backgroundVideo2" muted>
+    <source src="file:///D:/3D Animation - Anemia(720P_HD).mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+<video class="video-background" id="backgroundVideo3" muted>
+    <source src="file:///D:/3d animated blood flow - particle simulation(720P_HD).mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+<!-- Content overlay with video selector -->
+<div class="content">
+    <h1>Choose the Video You Want to Play</h1>
+    <div>
+        <button onclick="playVideo('file:///I:/invideo-ai-1080%20رحلة%20كرة%20الدم%20الحمراء%202024-11-05.mp4')">Arabic video 1</button>
+        <button onclick="playVideo('file:///I:/1730789263500.mp4')">English Video 2</button>
+        <button onclick="playVideo('file:///I:/invideo-ai-1080%20رحلة%20روبي_%20مغامرة%20خلية%20دم%20حمراء%20في%20جسم%20ا%202024-11-05.mp4')">Arabic Video 3</button>
+    </div>
+
+    <!-- Initially hidden video player -->
+    <video id="videoPlayer" controls>
+        <source id="videoSource" src="" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+
+<script>
+    // Background video elements
+    const video1 = document.getElementById('backgroundVideo1');
+    const video2 = document.getElementById('backgroundVideo2');
+    const video3 = document.getElementById('backgroundVideo3');
+
+    // Show the first video initially
+    video1.style.display = 'block';
+
+    // Event listeners to trigger next video when each ends
+    video1.addEventListener('ended', () => {
+        video1.style.display = 'none';
+        video2.style.display = 'block';
+        video2.play();
+    });
+
+    video2.addEventListener('ended', () => {
+        video2.style.display = 'none';
+        video3.style.display = 'block';
+        video3.play();
+    });
+
+    video3.addEventListener('ended', () => {
+        video3.style.display = 'none';
+        video1.style.display = 'block';
+        video1.play();
+    });
+
+    // Function to play selected video on click
+    function playVideo(videoFile) {
+        const videoPlayer = document.getElementById('videoPlayer');
+        const videoSource = document.getElementById('videoSource');
+        
+        // Set the source of the video
+        videoSource.src = videoFile;
+
+        // Show the video player and play the selected video
+        videoPlayer.style.display = 'block';
+        videoPlayer.load();
+        videoPlayer.play();
+    }
+</script>
+
+</body>
+</html>
